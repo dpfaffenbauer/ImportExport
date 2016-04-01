@@ -63,8 +63,68 @@ pimcore.plugin.importexport.import = Class.create({
     },
 
     getItems : function () {
-        return [
-            
-        ];
+        this.importForm = new Ext.form.Panel({
+            bodyStyle: 'padding:10px;',
+            autoScroll: true,
+            region : 'center',
+            defaults : {
+                labelWidth : 200
+            },
+            border:false,
+            buttons: [
+                {
+                    text: t('import'),
+                    handler: this.import.bind(this),
+                    iconCls: 'pimcore_icon_apply'
+                }
+            ],
+            items: 
+            [
+                {
+                    xtype: 'fileuploadfield',
+                    emptyText: t("select_a_file"),
+                    fieldLabel: t("file"),
+                    width: 500,
+                    name: "Filedata",
+                    buttonText: "",
+                    buttonConfig: {
+                        iconCls: 'pimcore_icon_upload'
+                    }
+                },
+                {
+                    fieldLabel: t('dryrun'),
+                    xtype: 'checkbox',
+                    name: 'dryRun',
+                    checked : true,
+                    value : true
+                }
+            ]
+        });
+        
+        return this.importForm;
+    },
+
+    import : function() {
+        this.importForm.getForm().submit({
+            url: '/plugin/ImportExport/import/import',
+            waitMsg: t("please_wait"),
+            success: function (el, res) {
+                this.parseResponse(res.response.responseText);
+            }.bind(this),
+            failure: function (el, res) {
+                pimcore.helpers.showNotification(t('error'), t('error'), 'error', t('unkown'));
+            }
+        });
+    },
+
+    parseResponse : function(response) {
+        response = Ext.decode(response);
+
+        var store = new Ext.data.Store({
+            fields: response.columns,
+            data : response.objects
+        });
+
+        new pimcore.plugin.importexport.importresult(Ext.id(), store, response.gridColumns);
     }
 });

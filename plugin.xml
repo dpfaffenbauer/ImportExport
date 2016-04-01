@@ -20,6 +20,7 @@
             <path>/plugins/ImportExport/static/js/startup.js</path>
             <path>/plugins/ImportExport/static/js/export.js</path>
             <path>/plugins/ImportExport/static/js/import.js</path>
+            <path>/plugins/ImportExport/static/js/importResult.js</path>
         </pluginJsPaths>
 
         <pluginCssPaths>

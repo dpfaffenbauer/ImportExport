@@ -40,12 +40,13 @@ class Import {
      * Import data to pimcore
      *
      * @param $data
+     * @param boolean $dryRun
      * @param $mode
      *
      * @return Concrete
      * @throws \Exception
      */
-    public static function importObject($data, $mode) {
+    public static function importObject($data, $dryRun = true, $mode = self::IMPORT_MODE_OVERWRITE) {
         $className = $data->classname;
         $elements = $data->elements;
 
@@ -108,11 +109,37 @@ class Import {
                 }
             }
 
-            $object->save();
+            if(!$dryRun) {
+                $object->save();
+            }
 
             return $object;
         }
 
-        throw new \Exception(sprintf("class with name %s not found"), $className);
+        throw new \Exception(sprintf("class with name %s not found", $className));
+    }
+
+    /**
+     * Import dump to pimcore
+     *
+     * @param $data
+     * @param boolean $dryRun
+     * @param $mode
+     *
+     * @return array
+     */
+    public static function importDump($data, $dryRun = true, $mode = self::IMPORT_MODE_OVERWRITE) {
+        $elements = array();
+
+        foreach($data as $objectData) {
+            try {
+                $elements[] = get_object_vars(self::importObject($objectData, $dryRun, $mode));
+            }
+            catch (\Exception $ex) {
+                $elements[] = $objectData;
+            }
+        }
+
+        return $elements;
     }
 }
