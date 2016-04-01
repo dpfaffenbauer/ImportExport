@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<zend-config xmlns:zf="http://framework.zend.com/xml/zend-config-xml/1.0/">
+    <plugin>
+        <pluginName>ImportExport</pluginName>
+        <pluginDescription><![CDATA[Import and Export Data out of Pimcore]]></pluginDescription>
+        <pluginVersion>0.1</pluginVersion>
+        <pluginRevision>1</pluginRevision>
+        <pluginBuildTimestamp>0</pluginBuildTimestamp>
+        <pluginClassName>\ImportExport\Plugin</pluginClassName>
+
+        <pluginIncludePaths>
+            <path>/ImportExport/lib</path>
+        </pluginIncludePaths>
+
+        <pluginNamespaces>
+            <namespace>ImportExport</namespace>
+        </pluginNamespaces>
+
+        <pluginJsPaths>
+            <path>/plugins/ImportExport/static/js/startup.js</path>
+            <path>/plugins/ImportExport/static/js/export.js</path>
+            <path>/plugins/ImportExport/static/js/import.js</path>
+        </pluginJsPaths>
+
+        <pluginCssPaths>
+            <path>/plugins/ImportExport/static/css/importexport.css</path>
+        </pluginCssPaths>
+    </plugin>
+</zend-config>
