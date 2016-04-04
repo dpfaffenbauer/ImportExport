@@ -24,7 +24,7 @@ class Export {
     /**
      * @var array System Columns that are going to be exported
      */
-    protected static $objectSystemColumnsNames = array("id", "fullpath", "published", "key", "classname", "parentId");
+    protected static $objectSystemColumnsNames = array("id", "fullpath", "published", "key", "classname");
 
     /**
      * Export a product to php-array
@@ -59,7 +59,8 @@ class Export {
 
         $exportData = array(
             "elements" => $elements,
-            "classname" => get_class($object)
+            "classname" => get_class($object),
+            "path" => $object->getPath()
         );
 
         foreach(self::$objectSystemColumnsNames as $systemColumn) {

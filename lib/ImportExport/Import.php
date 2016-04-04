@@ -122,6 +122,10 @@ class Import {
                     $object->$setter($value);
                 }
             }
+            $parent = AbstractObject::getByPath($data->path);
+
+            if($parent instanceof AbstractObject)
+                $object->setParent($parent);
 
             if(!$dryRun) {
                 $object->save();
