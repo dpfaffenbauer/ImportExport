@@ -14,6 +14,7 @@
 
 namespace ImportExport;
 
+use Pimcore\Model\Object\Service;
 use Pimcore\Model\Object\AbstractObject;
 use Pimcore\Model\Object\ClassDefinition\Data\Fieldcollections;
 use Pimcore\Model\Object\Concrete;
@@ -35,6 +36,11 @@ class Import {
      * ignore existing data
      */
     const IMPORT_MODE_IGNORE = 2;
+
+    /**
+     * import as new data data
+     */
+    const IMPORT_MODE_CREATE_NEW = 3;
 
     /**
      * Import data to pimcore
@@ -65,6 +71,14 @@ class Import {
                 else if($mode === self::IMPORT_MODE_DELETE) {
                     $object->delete();
                     $object = null;
+                }
+                else if($mode === self::IMPORT_MODE_CREATE_NEW) {
+                    //We do not need "save copy" folders
+                    if($object instanceof Concrete) {
+                        $data->key = Service::getSaveCopyName("object", $data->key, $object->getParent());
+
+                        $object = null;
+                    }
                 }
             }
 

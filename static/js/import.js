@@ -92,6 +92,19 @@ pimcore.plugin.importexport.import = Class.create({
                     }
                 },
                 {
+                    fieldLabel: t('import_mode'),
+                    name: 'mode',
+                    width: 500,
+                    xtype: 'combo',
+                    store: [[0, t('mode_overwrite')], [1, t('mode_delete')], [2, t('mode_ignore')], [3, t('mode_create_new')]],
+                    value : 0,
+                    triggerAction: 'all',
+                    typeAhead: false,
+                    editable: false,
+                    forceSelection: true,
+                    queryMode: 'local'
+                },
+                {
                     fieldLabel: t('dryrun'),
                     xtype: 'checkbox',
                     name: 'dryRun',

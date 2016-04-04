@@ -3,3 +3,8 @@
 "importexport_import_result","Object Importer Result"
 "export_unpublished","Export Unpublished Objects"
 "dryrun","Preview Run"
+"import_mode","Importmode"
+"mode_overwrite","Overwrite existing data"
+"mode_delete","Delete existing data"
+"mode_ignore","Ignore new data"
+"mode_create_new","Create with new Key"

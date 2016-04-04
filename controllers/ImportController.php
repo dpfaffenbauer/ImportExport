@@ -17,7 +17,7 @@ class ImportExport_ImportController extends \Pimcore\Controller\Action\Admin
     public function importAction() {
         $json = file_get_contents($_FILES["Filedata"]["tmp_name"]);
         $dryRun = $this->getParam("dryRun") === "on";
-        $mode = $this->getParam("mode", \ImportExport\Import::IMPORT_MODE_OVERWRITE);
+        $mode = intval($this->getParam("mode", \ImportExport\Import::IMPORT_MODE_OVERWRITE));
 
         $data = json_decode($json);
 
