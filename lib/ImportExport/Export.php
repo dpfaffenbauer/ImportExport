@@ -94,6 +94,9 @@ class Export {
         $doExport = false;
 
         if(count($classTypes) > 0) {
+            $classParts = explode("\\", $className);
+            $className = $classParts[count($classParts) - 1];
+
             if(in_array($className, $classTypes)) {
                 $doExport = true;
             }

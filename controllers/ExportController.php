@@ -18,8 +18,8 @@ class ImportExport_ExportController extends \Pimcore\Controller\Action\Admin
     public function exportAction()
     {
         $folder = $this->getParam("folder");
-        $classes = $this->getParam("allowedClasses");
-        $types = $this->getParam("allowedTypes");
+        $classes = $this->getParam("allowedClasses", array());
+        $types = $this->getParam("allowedTypes", array());
         $unpublished = $this->getParam("unpublished");
 
         $exportFolder = \Pimcore\Model\Object\Folder::getByPath($folder);

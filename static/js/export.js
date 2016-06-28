@@ -80,9 +80,9 @@ pimcore.plugin.importexport.export = Class.create({
                 'text'
             ],
             data : [
-                [0, t('variants')],
-                [1, t('folder')],
-                [2, t('object')]
+                ['variant', t('variants')],
+                ['folder', t('folder')],
+                ['object', t('object')]
             ]
         });
 
@@ -143,7 +143,7 @@ pimcore.plugin.importexport.export = Class.create({
                 },
                 new Ext.ux.form.MultiSelect({
                     fieldLabel: t("allowed_classes") + '<br />' + t('allowed_types_hint'),
-                    name: "allowedClasses",
+                    name: "allowedClasses[]",
                     displayField: "text",
                     valueField: "text",
                     store: classesStore,
@@ -151,7 +151,7 @@ pimcore.plugin.importexport.export = Class.create({
                 }),
                 new Ext.ux.form.MultiSelect({
                     fieldLabel: t("allowed_types") + '<br />' + t('allowed_types_hint'),
-                    name: "allowedTypes",
+                    name: "allowedTypes[]",
                     store: objectTypeStore,
                     width: 500,
                     displayField: "text",
